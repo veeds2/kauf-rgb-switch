@@ -106,6 +106,7 @@ text_sensor:
   - platform: homeassistant
     id: hass_light_state
     entity_id: $hass_light_entity
+    attribute: rgb_color
     on_value:
       - delay: 1ms
       - if:
@@ -316,16 +317,6 @@ script:
   - id: switch_to_light_on
     then:
       - lambda: |-
-          auto rgb = id(hass_light_rgb).state.c_str();
-          int red, green, blue;
-          int rgb_values = sscanf(rgb, "[%d, %d, %d]", &red, &green, &blue);
-          if (rgb_values == 3) {
-            // Update the switch color
-            auto call = id(big_light).turn_on();
-            call.set_rgb((float)red/255.0f, (float)green/255.0f, (float)blue/255.0f);
-            call.perform();
-          }
-      - lambda: |-
           // exit if light entity not set
           if (strcmp("$hass_light_entity","no.ne") != 0) {
 
@@ -453,7 +444,16 @@ script:
             global_api_server->send_homeassistant_service_call(resp);
 
           }
-
+      - lambda: |-
+          auto rgb = id(hass_light_state).state.c_str();
+          int red, green, blue;
+          int rgb_values = sscanf(rgb, "[%d, %d, %d]", &red, &green, &blue);
+          if (rgb_values == 3) {
+            // Update the switch color
+            auto call = id(big_light).turn_on();
+            call.set_rgb((float)red/255.0f, (float)green/255.0f, (float)blue/255.0f);
+            call.perform();
+          }
     # once button is held for initial delay, don't toggle until button is released again.
   - id: script_dont_toggle
     then:
