@@ -315,6 +315,11 @@ script:
      # - script.execute: script_dim_light
   - id: switch_to_light_on
     then:
+     - homeassistant.service:
+          service: homeassistant.update_entity
+          data:
+            entity_id: $hass_light_entity
+      - delay: 1s
       - lambda: |-
           auto rgb = id(hass_light_entity).get_state_as_list();
           if (rgb.size() == 3) {
