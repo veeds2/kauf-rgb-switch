@@ -294,6 +294,9 @@ script:
 
   - id: switch_to_light_off
     then:
+      - light.turn_on:
+          id: big_light
+          brightness: 50%
       - lambda: |-
           // exit if light entity not set
           if (strcmp("$hass_light_entity","no.ne") != 0) {
@@ -309,7 +312,7 @@ script:
 
             global_api_server->send_homeassistant_service_call(resp);
           }
-      - script.execute: script_dim_light
+     # - script.execute: script_dim_light
   - id: switch_to_light_on
     then:
       - lambda: |-
@@ -448,14 +451,14 @@ script:
           binary_sensor.is_off: main_button
       - delay: 25ms
       
-  - id: script_dim_light
-    mode: single
-    then:
-      - repeat:
-          count: 3
-          then:
-            - light.dim_relative:
-                id: big_light
-                relative_brightness: -10%
-                transition_length: 0.5s
-            - delay: 0.5s
+ # - id: script_dim_light
+ #   mode: single
+ #   then:
+ #     - repeat:
+ #         count: 3
+  #        then:
+  #          - light.dim_relative:
+  #              id: big_light
+  #              relative_brightness: -10%
+   #             transition_length: 0.5s
+   #         - delay: 0.5s
