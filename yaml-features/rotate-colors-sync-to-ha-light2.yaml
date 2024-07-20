@@ -321,7 +321,7 @@ script:
             entity_id: $hass_light_entity
       - delay: 1s
       - lambda: |-
-          auto rgb = id(hass_light_entity).get_state_as_list();
+          auto rgb = id(entity_id).get_state_as_list();
           if (rgb.size() == 3) {
             int red = rgb[0];
             int green = rgb[1];
