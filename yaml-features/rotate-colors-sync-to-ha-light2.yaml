@@ -448,14 +448,3 @@ script:
       - wait_until:
           binary_sensor.is_off: main_button
       - delay: 25ms
- - id: script_dim_light
-    mode: single
-    then:
-      - repeat:
-          count: 10
-          then:
-            - light.dim_relative:
-                id: big_light
-                relative_brightness: -10%
-                transition_length: 0.5s
-            - delay: 0.5s
