@@ -254,7 +254,17 @@ script:
         # delay and run again forever.  Stopped by on_release script.
       - delay: $change_delay
       - script.execute: script_change_color
-
+ - id: script_dim_light
+    mode: single
+    then:
+      - repeat:
+          count: 10
+          then:
+            - light.dim_relative:
+                id: big_light
+                relative_brightness: -10%
+                transition_length: 0.5s
+            - delay: 0.5s
   - id: copy_val_to_light
     then:
       - lambda: |-
