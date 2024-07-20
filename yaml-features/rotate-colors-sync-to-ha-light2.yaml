@@ -315,20 +315,6 @@ script:
      # - script.execute: script_dim_light
   - id: switch_to_light_on
     then:
-     - homeassistant.service:
-          service: homeassistant.update_entity
-          data:
-            entity_id: $hass_light_entity
-      - delay: 1s
-      - lambda: |-
-          auto rgb = id(entity_id).get_state_as_list();
-          if (rgb.size() == 3) {
-            int red = rgb[0];
-            int green = rgb[1];
-            int blue = rgb[2];
-            // Update the switch color
-            id(big_light).turn_on().set_rgb((float)red/255.0f, (float)green/255.0f, (float)blue/255.0f).perform();
-          }
       - lambda: |-
           // exit if light entity not set
           if (strcmp("$hass_light_entity","no.ne") != 0) {
