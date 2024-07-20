@@ -452,7 +452,7 @@ script:
     mode: single
     then:
       - repeat:
-          count: 10
+          count: 3
           then:
             - light.dim_relative:
                 id: big_light
