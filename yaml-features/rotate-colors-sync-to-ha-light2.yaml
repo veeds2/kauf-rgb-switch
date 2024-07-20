@@ -309,7 +309,7 @@ script:
 
             global_api_server->send_homeassistant_service_call(resp);
           }
-      - script.execute: script_dim_light
+      #- script.execute: script_dim_light
   - id: switch_to_light_on
     then:
       - lambda: |-
