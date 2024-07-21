@@ -131,7 +131,7 @@ script:
           // only start cycling colors if the light is on
          // if ( id(ui_switch).state ) {
          //   id(script_change_color).execute();
-        //  }
+          }
 
   - id: script_on_release
     then:
