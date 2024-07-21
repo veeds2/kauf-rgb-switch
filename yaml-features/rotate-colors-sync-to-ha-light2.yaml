@@ -106,7 +106,7 @@ text_sensor:
   - platform: homeassistant
     id: hass_light_state
     entity_id: $hass_light_entity
-    attribute: rgb_color
+#    attribute: rgb_color
     on_value:
       - delay: 1ms
       - if:
