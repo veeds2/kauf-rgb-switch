@@ -130,8 +130,7 @@ text_sensor:
             ESP_LOGD("RGB Color", "Red: %d, Green: %d, Blue: %d", red, green, blue);
             call.perform();
           }
-
-          
+   
 script:
   - id: script_on_hold
     then:
