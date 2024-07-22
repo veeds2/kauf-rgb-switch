@@ -120,7 +120,7 @@ text_sensor:
     on_value:
       then:
         - lambda: |-
-           if ( id(hass_light_rgb).state && (strcmp("$hass_light_entity","no.ne") != 0) ) {
+          if ( id(hass_light_rgb).state && (strcmp("$hass_light_entity","no.ne") != 0) ) {
             auto rgb = id(hass_light_rgb).state.c_str();
             int red, green, blue;
             int rgb_values = sscanf(rgb, "(%d, %d, %d)", &red, &green, &blue);
