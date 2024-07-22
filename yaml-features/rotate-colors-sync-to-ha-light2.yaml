@@ -315,7 +315,7 @@ script:
 
   - id: switch_to_light_off
     then:
-    - lambda: |-
+      - lambda: |-
           // Set light to 50% brightness and color to grey
           auto call = id(big_light).turn_on();
           call.set_brightness(0.5);
