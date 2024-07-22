@@ -114,8 +114,9 @@ text_sensor:
             lambda: return ( ((x == "on") && !id(ui_switch).state) || ((x == "off") && id(ui_switch).state) );
           then:
             - switch.toggle: ui_switch
-            id(copy_val_to_light).execute();
-
+            - lambda: |-
+              id(copy_val_to_light).execute();
+            }
 script:
   - id: script_on_hold
     then:
