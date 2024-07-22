@@ -315,9 +315,9 @@ script:
 
   - id: switch_to_light_off
     then:
-      - light.turn_on:
-          id: big_light
-          brightness: 50%
+        //- light.turn_on:
+        //   id: big_light
+        //  brightness: 50%
       - lambda: |-
           // exit if light entity not set
           if (strcmp("$hass_light_entity","no.ne") != 0) {
