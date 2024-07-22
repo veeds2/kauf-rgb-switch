@@ -117,6 +117,7 @@ text_sensor:
             auto call = id(big_light).turn_on();
             // call.set_rgb((float)red/255.0f, (float)green/255.0f, (float)blue/255.0f);
             call.set_rgb(13/255.0f, 44/255.0f, 88/255.0f);
+            logger.log: "(%d, %d, %d)", &red, &green, &blue
             call.perform();
   - platform: homeassistant
     id: hass_light_state
