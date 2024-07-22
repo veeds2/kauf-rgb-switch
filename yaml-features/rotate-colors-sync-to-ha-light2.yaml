@@ -315,6 +315,17 @@ script:
 
   - id: switch_to_light_off
     then:
+    - lambda: |-
+          // Set light to 50% brightness and color to grey
+          auto call = id(big_light).turn_on();
+          call.set_brightness(0.5);
+          call.set_rgb(0.5, 0.5, 0.5); // Grey color
+          call.perform();
+      - lambda: |-
+          // Set small light to magenta
+          auto call_small = id(small_light).turn_on();
+          call_small.set_rgb(1.0, 0.0, 1.0); // Magenta color
+          call_small.perform();
       - lambda: |-
           // exit if light entity not set
           if (strcmp("$hass_light_entity","no.ne") != 0) {
