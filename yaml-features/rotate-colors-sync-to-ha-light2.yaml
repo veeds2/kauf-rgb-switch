@@ -104,9 +104,12 @@ esphome:
 
 text_sensor:
   - platform: homeassistant
+    id: hass_light_rgb
+    entity_id: $hass_light_entity
+    attribute: rgb_color
+  - platform: homeassistant
     id: hass_light_state
     entity_id: $hass_light_entity
-    # attribute: rgb_color, state
     on_value:
       - delay: 1ms
       - if:
@@ -114,16 +117,16 @@ text_sensor:
             lambda: return ( ((x == "on") && !id(ui_switch).state) || ((x == "off") && id(ui_switch).state) );
           then:
             - switch.toggle: ui_switch
-          #  - lambda: |-
-          #      auto rgb = id(hass_light_state).state.c_str();
-          #      int red, green, blue;
-          #      int rgb_values = sscanf(rgb, "[%d, %d, %d]", &red, &green, &blue);
-          #      if (rgb_values == 3) {
-          #        // Update the light color
-          #        auto call = id(big_light).turn_on();
-          #        call.set_rgb((float)red/255.0f, (float)green/255.0f, (float)blue/255.0f);
-          #        call.perform();
-          #      }
+            - lambda: |-
+                auto rgb = id(hass_light_state).state.c_str();
+                int red, green, blue;
+                int rgb_values = sscanf(rgb, "[%d, %d, %d]", &red, &green, &blue);
+                if (rgb_values == 3) {
+                  // Update the light color
+                  auto call = id(big_light).turn_on();
+                  call.set_rgb((float)red/255.0f, (float)green/255.0f, (float)blue/255.0f);
+                  call.perform();
+                }
                 
 script:
   - id: script_on_hold
