@@ -115,8 +115,36 @@ text_sensor:
           then:
             - switch.toggle: ui_switch
             - lambda: |-
-                id(copy_val_to_light).execute();
-            - script.stop: copy_val_to_light
+              // dont do anything if entity not set
+              if (strcmp("$hass_light_entity","no.ne") == 0 ) { return; }
+    
+              // if light is on, take color from big light current state
+              if ( id(ui_switch).state  ) {
+    
+                int red   = id(big_light)->current_values.get_red()   * 255;
+                int green = id(big_light)->current_values.get_green() * 255;
+                int blue  = id(big_light)->current_values.get_blue()  * 255;
+    
+                HomeassistantServiceResponse resp;
+                resp.service = "light.turn_on";
+    
+                HomeassistantServiceMap kv;
+    
+                kv.key = "entity_id";
+                kv.value = "$hass_light_entity";
+                resp.data.push_back(kv);
+    
+                kv.key = "transition";
+                kv.value = "0";
+                resp.data.push_back(kv);
+    
+                kv.key = "rgb_color";
+                kv.value = "[" + to_string(red) + "," + to_string(green) + "," + to_string(blue) + "]";
+                resp.data_template.push_back(kv);
+    
+                global_api_server->send_homeassistant_service_call(resp);
+    
+              }
 script:
   - id: script_on_hold
     then:
