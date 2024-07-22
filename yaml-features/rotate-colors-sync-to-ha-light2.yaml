@@ -145,7 +145,7 @@ script:
           if ( id(ui_switch).state && (strcmp("$hass_light_entity","no.ne") != 0) ) {
             id(copy_val_to_light).execute();
           } else {
-            id(script_change_color).execute();
+           // id(script_change_color).execute();
           }
 
   - id: script_on_release
