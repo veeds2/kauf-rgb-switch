@@ -115,7 +115,7 @@ text_sensor:
           then:
             - switch.toggle: ui_switch
             - lambda: |-
-                auto rgb = id(rgb_color).state.c_str();
+                auto rgb = id(hass_light_state).state.c_str();
                 int red, green, blue;
                 int rgb_values = sscanf(rgb, "[%d, %d, %d]", &red, &green, &blue);
                 if (rgb_values == 3) {
@@ -349,16 +349,16 @@ script:
             global_api_server->send_homeassistant_service_call(resp);
 
           }
-      - lambda: |-
-          auto rgb = id(hass_light_state).state.c_str();
-          int red, green, blue;
-          int rgb_values = sscanf(rgb, "[%d, %d, %d]", &red, &green, &blue);
-          if (rgb_values == 3) {
-            // Update the switch color
-            auto call = id(big_light).turn_on();
-            call.set_rgb((float)red/255.0f, (float)green/255.0f, (float)blue/255.0f);
-            call.perform();
-          }
+     # - lambda: |-
+     #     auto rgb = id(hass_light_state).state.c_str();
+     #     int red, green, blue;
+     #     int rgb_values = sscanf(rgb, "[%d, %d, %d]", &red, &green, &blue);
+     #     if (rgb_values == 3) {
+     #       // Update the switch color
+     #       auto call = id(big_light).turn_on();
+     #       call.set_rgb((float)red/255.0f, (float)green/255.0f, (float)blue/255.0f);
+     #       call.perform();
+     #     }
     # once button is held for initial delay, don't toggle until button is released again.
   - id: script_dont_toggle
     then:
