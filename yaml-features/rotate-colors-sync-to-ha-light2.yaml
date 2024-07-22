@@ -373,7 +373,7 @@ script:
       - lambda: |-
           // Set light to 50% brightness and color to grey
           auto call = id(big_light).turn_on();
-          call.set_brightness(0.5);
+          call.set_brightness(0.8);
           call.perform();
           
     # once button is held for initial delay, don't toggle until button is released again.
