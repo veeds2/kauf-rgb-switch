@@ -115,7 +115,7 @@ text_sensor:
           then:
             - switch.toggle: ui_switch
             - lambda: |-
-                auto rgb = rgb_color(hass_light_state).c_str();
+                auto rgb = entity_id(hass_light_state).rgb_color.c_str();
                 int red, green, blue;
                 int rgb_values = sscanf(rgb, "[%d, %d, %d]", &red, &green, &blue);
                 if (rgb_values == 3) {
