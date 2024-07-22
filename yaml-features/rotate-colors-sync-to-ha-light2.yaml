@@ -120,6 +120,7 @@ text_sensor:
     on_value:
       then:
         - lambda: |-
+            // update light 
             if (id(ui_switch).state && strcmp("$hass_light_entity","no.ne") != 0 ) {
               auto rgb = id(hass_light_rgb).state.c_str();
               int red, green, blue;
@@ -142,7 +143,7 @@ script:
           // if switch (and thus light) is on and hass_light_entity substitution is set
           // then call copy_val_to_light first, which will then call script_change_color
           // otherwise, just go straight to script_change_color
-           ESP_LOGD("Switch Hold", "hass_light_entity: %d", strcmp("$hass_light_entity","no.ne");
+          ESP_LOGD("Switch Hold", "hass_light_entity: %d", strcmp("$hass_light_entity","no.ne"));
           ESP_LOGD("Switch Hold", "State: %d", id(ui_switch).state);
           if ( id(ui_switch).state && (strcmp("$hass_light_entity","no.ne") != 0) ) {
             id(copy_val_to_light).execute();
