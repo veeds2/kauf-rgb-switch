@@ -109,7 +109,7 @@ text_sensor:
     attribute: rgb_color
     on_value:
       - lambda: |-
-          auto rgb = rgb_color(hass_light_rgb).state;
+          auto rgb = attribute(hass_light_rgb).rgb_color;
           int red, green, blue;
           int rgb_values = sscanf(rgb, "[%d, %d, %d]", &red, &green, &blue);
           if (rgb_values == 3) {
