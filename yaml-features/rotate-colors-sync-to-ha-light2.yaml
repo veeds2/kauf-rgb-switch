@@ -345,6 +345,7 @@ script:
           }
      # - script.execute: script_dim_light
   - id: switch_to_light_on
+    brightness: 50%
     then:
       - lambda: |-
           // Set small light to magenta
