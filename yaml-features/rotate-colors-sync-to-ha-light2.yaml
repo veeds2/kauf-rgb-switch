@@ -333,7 +333,7 @@ script:
   - id: switch_to_light_on
     then:
       - lambda: |-
-          if (id(hass_light_state).state == "on") {
+         # if (id(hass_light_state).state == "on") {
             auto rgb = id(hass_light_rgb).state.c_str();
             int red, green, blue;
             int rgb_values = sscanf(rgb, "[%d, %d, %d]", &red, &green, &blue);
@@ -343,7 +343,7 @@ script:
               call.set_rgb((float)red/255.0f, (float)green/255.0f, (float)blue/255.0f);
               call.perform();
             }
-          }
+         # }
           // exit if light entity not set
           if (strcmp("$hass_light_entity","no.ne") != 0) {
 
