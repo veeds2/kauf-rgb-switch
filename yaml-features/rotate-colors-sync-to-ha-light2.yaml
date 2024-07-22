@@ -114,10 +114,10 @@ text_sensor:
             int red, green, blue;
             int rgb_values = sscanf(rgb, "[%d, %d, %d]", &red, &green, &blue);
             #if (rgb_values == 3) {
-              // Update the light color
-              auto call = id(big_light).turn_on();
-              call.set_rgb((float)red/255.0f, (float)green/255.0f, (float)blue/255.0f);
-              call.perform();
+            // Update the light color
+            auto call = id(big_light).turn_on();
+            call.set_rgb((float)red/255.0f, (float)green/255.0f, (float)blue/255.0f);
+            call.perform();
             #}
   - platform: homeassistant
     id: hass_light_state
