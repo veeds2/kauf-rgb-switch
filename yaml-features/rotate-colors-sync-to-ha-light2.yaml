@@ -120,16 +120,16 @@ text_sensor:
     on_value:
       then:
         - lambda: |-
-          if ( id(hass_light_rgb).state && (strcmp("$hass_light_entity","no.ne") != 0) ) {
-            auto rgb = id(hass_light_rgb).state.c_str();
-            int red, green, blue;
-            int rgb_values = sscanf(rgb, "(%d, %d, %d)", &red, &green, &blue);
-            // Update the light color
-            auto call = id(big_light).turn_on();
-            call.set_rgb(red/255.0f, green/255.0f, blue/255.0f);
-            ESP_LOGD("RGB Color", "Red: %d, Green: %d, Blue: %d", red, green, blue);
-            call.perform();
-          }
+            if ( id(hass_light_rgb).state && (strcmp("$hass_light_entity","no.ne") != 0) ) {
+              auto rgb = id(hass_light_rgb).state.c_str();
+              int red, green, blue;
+              int rgb_values = sscanf(rgb, "(%d, %d, %d)", &red, &green, &blue);
+              // Update the light color
+              auto call = id(big_light).turn_on();
+              call.set_rgb(red/255.0f, green/255.0f, blue/255.0f);
+              ESP_LOGD("RGB Color", "Red: %d, Green: %d, Blue: %d", red, green, blue);
+              call.perform();
+            }
    
 script:
   - id: script_on_hold
