@@ -345,10 +345,9 @@ script:
           }
      # - script.execute: script_dim_light
   - id: switch_to_light_on
-    brightness: 50%
     then:
       - lambda: |-
-          // Set small light to magenta
+          // Set small light to green
           auto call_small = id(small_light).turn_on();
           call_small.set_rgb(0.0f, 1.0f, 0.0f); // Green
           call_small.perform();
@@ -368,11 +367,15 @@ script:
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////
             // add brightness if set
 
-         
             global_api_server->send_homeassistant_service_call(resp);
 
           }
-
+      - lambda: |-
+          // Set light to 50% brightness and color to grey
+          auto call = id(big_light).turn_on();
+          call.set_brightness(0.5);
+          call.perform();
+          
     # once button is held for initial delay, don't toggle until button is released again.
   - id: script_dont_toggle
     then:
