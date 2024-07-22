@@ -120,7 +120,7 @@ text_sensor:
     on_value:
       then:
         - lambda: |-
-            // update light 
+            // update switch color when the light color is externally modified
             if (id(ui_switch).state && strcmp("$hass_light_entity","no.ne") != 0 ) {
               auto rgb = id(hass_light_rgb).state.c_str();
               int red, green, blue;
@@ -346,6 +346,11 @@ script:
      # - script.execute: script_dim_light
   - id: switch_to_light_on
     then:
+      - lambda: |-
+          // Set small light to magenta
+          auto call_small = id(small_light).turn_on();
+          call_small.set_rgb(0.0f, 1.0f, 0.0f); // Green
+          call_small.perform();
       - lambda: |-
           // exit if light entity not set
           if (strcmp("$hass_light_entity","no.ne") != 0) {
