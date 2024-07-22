@@ -116,8 +116,6 @@ text_sensor:
             - switch.toggle: ui_switch
             id(copy_val_to_light).execute();
 
-
-
 script:
   - id: script_on_hold
     then:
