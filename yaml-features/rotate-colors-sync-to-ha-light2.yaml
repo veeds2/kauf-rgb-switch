@@ -119,7 +119,7 @@ text_sensor:
               if (strcmp("$hass_light_entity","no.ne") == 0 ) { return; }
     
               // if light is on, take color from big light current state
-              if ( id(ui_switch).state  ) {
+
     
                 int red   = id(big_light)->current_values.get_red()   * 255;
                 int green = id(big_light)->current_values.get_green() * 255;
@@ -144,7 +144,7 @@ text_sensor:
     
                 global_api_server->send_homeassistant_service_call(resp);
     
-              }
+              
 script:
   - id: script_on_hold
     then:
