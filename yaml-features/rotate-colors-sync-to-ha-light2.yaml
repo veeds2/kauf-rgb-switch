@@ -115,7 +115,7 @@ text_sensor:
           then:
             - switch.toggle: ui_switch
             - lambda: |-
-              id(copy_val_to_light).execute();
+                id(copy_val_to_light).execute();
             
 script:
   - id: script_on_hold
