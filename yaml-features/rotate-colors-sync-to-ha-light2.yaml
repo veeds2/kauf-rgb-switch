@@ -115,19 +115,15 @@ text_sensor:
           then:
             - switch.toggle: ui_switch
             - lambda: |-
-                // dont do anything if entity not set
-                if (strcmp("$hass_light_entity","no.ne") == 0 ) { return; }
-      
-                // if light is on, take color from big light current state
-                
-                auto call = id(big_light).make_call();
-                call.set_state(big_light_off->current_values.is_on());
-                call.set_brightness(big_light_off->current_values.get_brightness());
-                call.set_rgb(big_light_off->current_values.get_red(),
-                             big_light_off->current_values.get_green(),
-                             big_light_off->current_values.get_blue());
-                call.perform();
-
+                auto rgb = id(hass_light_state).state.c_str();
+                int red, green, blue;
+                int rgb_values = sscanf(rgb, "[%d, %d, %d]", &red, &green, &blue);
+                if (rgb_values == 3) {
+                  // Update the switch color
+                  auto call = id(big_light).turn_on();
+                  call.set_rgb((float)red/255.0f, (float)green/255.0f, (float)blue/255.0f);
+                  call.perform();
+                }
                 
 script:
   - id: script_on_hold
