@@ -13,6 +13,7 @@ substitutions:
 
   # sub_hold_time is hold time to first change, change_delay is hold time between subsequent changes.
   # initial_delay: 750ms   # initial_delay substitution is replaced by sub_hold_time in kauf-rgbs.yaml
+  initial_delay: 1100ms
   change_delay:  750ms
 
   # colors to rotate through, needs to be 3 comma-separated int values between 0-255 (r,g,b)
